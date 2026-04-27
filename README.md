@@ -1,64 +1,113 @@
 # ATM Machine Simulation (Java)
 
-A **console-based ATM machine simulation** built using **Java and Object-Oriented Programming (OOP)** concepts.
-The program allows users to perform basic banking operations such as depositing money, withdrawing money, and checking account balance through a menu-driven interface.
+A console-based ATM machine simulation built using Java and Object-Oriented Programming (OOP) concepts.
+This project allows users to perform basic banking operations such as depositing money, withdrawing money, and checking account balance using a PIN-based authentication system.
+
+---
 
 ## Features
 
+* PIN-based user authentication
 * Deposit money into the account
 * Withdraw money with balance validation
 * Check current account balance
-* Menu-driven user interface using `Scanner`
-* Prevents withdrawal when balance is insufficient
+* Exception handling for invalid inputs
+* Menu-driven interface using `Scanner`
+
+---
 
 ## Technologies Used
 
 * Java
-* OOP Concepts
+* Object-Oriented Programming (OOP)
+* Exception Handling
 * Git & GitHub
+
+---
 
 ## OOP Concepts Implemented
 
-* **Interfaces** – `ATMoperations` defines the banking operations
-* **Encapsulation** – balance is stored as a private variable inside the ATM class
-* **Abstraction** – interface hides implementation details
-* **Polymorphism** – interface reference used to access ATM methods
+* Interfaces – `ATMoperations` defines core banking methods
+* Encapsulation – Balance and PIN are private inside the `ATM` class
+* Abstraction – Interface hides implementation details
+* Polymorphism – Interface reference used to access methods
+
+---
 
 ## Project Structure
 
-ATM-Machine
+```
+ATM-Machine/
 │
 ├── ATMoperations.java
 ├── ATMmachine.java
+```
+
+---
 
 ## How to Run the Program
 
 1. Clone the repository
+
+```
 git clone https://github.com/ved-1046/ATM---Machine.git
+```
 
-2. Open the project in any Java IDE (IntelliJ, VS Code, Eclipse)
+2. Navigate to the project folder
 
-3. Compile and run:
+```
+cd ATM---Machine
+```
 
+3. Compile the program
 
+```
 javac ATMmachine.java
+```
+
+4. Run the program
+
+```
 java ATMmachine
+```
 
+---
 
-## Example Menu
-------------MENU------------
-1. DEPOSIT
-2. WITHDRAW
-3. CHECK BALANCE
-4. EXIT
+## Example Output
+
+```
+===== ATM MACHINE =====
+Enter PIN: 1234
+
+1. Deposit
+2. Withdraw
+3. Check Balance
+4. Exit
+```
+
+---
+
+## Error Handling
+
+* Prevents deposit/withdrawal of invalid amounts
+* Displays message for insufficient balance
+* Handles incorrect PIN entry
+* Detects invalid input types
+
+---
 
 ## Future Improvements
-* Add **PIN authentication**
-* Add **transaction history**
-* Add **daily withdrawal limit**
-* Support **multiple user accounts**
+
+* Add transaction history
+* Implement multiple user accounts
+* Add daily withdrawal limits
+* Store data using files or database
+* Develop a GUI version using Java Swing or JavaFX
+
+---
 
 ## Author
 
 Vedika Tamshetti
-Computer Engineering Student | Java • OOP • DSA
+Computer Engineering Student
+Java • OOP • DSA
