@@ -1,79 +1,110 @@
 import java.util.Scanner;
 
-interface ATMoperations{
-    void deposit(double amount);
-    void withdraw(double amount);
-    void checkBalance();
 
+class InvalidInputException extends Exception {
+    public InvalidInputException(String message) {
+        super(message);
+    }
 }
 
-class ATM implements ATMoperations{
+interface ATMoperations {
+    void deposit(double amount) throws InvalidInputException;
+    void withdraw(double amount) throws InvalidInputException;
+    void checkBalance();
+}
+
+class ATM implements ATMoperations {
 
     private double balance = 10000;
-    @Override
-    public void deposit(double amount) {
-        balance = balance + amount;
-        System.out.println("The amount deposited is : " + amount);
+    private int PIN = 1234;
+
+    public boolean checkPin(int pin) {
+        return this.PIN == pin;
     }
 
-    @Override
-    public void withdraw(double amount) {
-        if(balance < amount){
-            System.out.println("Insufficient Balance");
-        }else{
-            balance = balance - amount;
-            System.out.println("Withdrawn amount is : " + amount);
+    public void deposit(double amount) throws InvalidInputException {
+        if (amount <= 0) {
+            throw new InvalidInputException("Deposit amount must be greater than 0");
+        }
+        balance += amount;
+        System.out.println("Amount deposited: ₹" + amount);
+    }
+
+    public void withdraw(double amount) throws InvalidInputException {
+        if (amount <= 0) {
+            throw new InvalidInputException("Withdrawal amount must be greater than 0");
+        } else if (amount > balance) {
+            throw new InvalidInputException("Insufficient Balance");
+        } else {
+            balance -= amount;
+            System.out.println("Withdrawn: ₹" + amount);
         }
     }
 
-    @Override
     public void checkBalance() {
-        System.out.println("Current Balance : " + balance);
+        System.out.println("Current Balance: ₹" + balance);
     }
 }
 
-
 public class ATMmachine {
-    public static void main(String args[]){
+    public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
-        ATMoperations atm = new ATM();
+        ATM atm = new ATM();
 
-        while (true){
-            System.out.println("------------MENU------------");
-            System.out.println("1.DEPOSIT");
-            System.out.println("2.WITHDRAW");
-            System.out.println("3.CHECK BALANCE");
-            System.out.println("4.Exit");
-            System.out.println("Enter your choice");
-            int choice = sc.nextInt();
+        System.out.println("===== ATM MACHINE =====");
 
-            switch (choice){
-                case 1:
-                    System.out.println("Enter the amount to deposit");
-                    int amount = sc.nextInt();
-                    atm.deposit(amount);
+        try {
+            System.out.print("Enter PIN: ");
+            int pin = sc.nextInt();
 
-                    break;
-
-                case 2:
-                    System.out.println("Enter the amount you want to withdraw");
-                    int withdraw = sc.nextInt();
-                    atm.withdraw(withdraw);
-                    break;
-
-
-                case 3:
-                    atm.checkBalance();
-                    break;
-
-                case 4:
-                    System.out.println("Thankyou for using ATM machine");
-                    return;
-
-                default:
-                    System.out.println("Invalid choice entered");
+            if (!atm.checkPin(pin)) {
+                System.out.println("Wrong PIN! Access Denied.");
+                return;
             }
 
+            while (true) {
+                System.out.println("\n1. Deposit");
+                System.out.println("2. Withdraw");
+                System.out.println("3. Check Balance");
+                System.out.println("4. Exit");
+                System.out.print("Enter choice: ");
+
+                int choice = sc.nextInt();
+
+                switch (choice) {
+                    case 1:
+                        System.out.print("Enter amount: ");
+                        double d = sc.nextDouble();
+                        atm.deposit(d);
+                        break;
+
+                    case 2:
+                        System.out.print("Enter amount: ");
+                        double w = sc.nextDouble();
+                        atm.withdraw(w);
+                        break;
+
+                    case 3:
+                        atm.checkBalance();
+                        break;
+
+                    case 4:
+                        System.out.println("Thank you!");
+                        return;
+
+                    default:
+                        throw new InvalidInputException("Invalid menu choice!");
+                }
+            }
+
+        } catch (InvalidInputException e) {
+            System.out.println("Error: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Invalid input type!");
+        } finally {
+            sc.close();
+            System.out.println("Session Ended.");
         }
     }
 }
