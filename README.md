@@ -47,7 +47,7 @@ ATM-Machine/
 
 ## How to Run the Program
 
-1. Clone the repository
+1. Clone the repository 
 
 ```
 git clone https://github.com/ved-1046/ATM---Machine.git
@@ -110,4 +110,4 @@ Enter PIN: 1234
 
 Vedika Tamshetti
 Computer Engineering Student
-Java • OOP • DSA
+JAVA & OOPs concept
